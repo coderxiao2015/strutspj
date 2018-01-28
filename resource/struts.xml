@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.action.extension" value="do"/>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <!--包名随便起，namespace 是紧接着端口号之后的路径 extends 是继承stuts-default.xml 这个配置文件-->
+    <!-- 问题1：在这里可能会碰见exteds="struts-default" 这个属性报错的情况，原因是struts doctype 引入的协议是
+     "http://struts.apache.org/dtds/struts-2.5.dtd" 但是导入的jar 包是其他版本的jar 包。将这里的标签文件的版本和jar 的版本对应上即可
+     消除这个问题-->
+    <package name="core" namespace="/core" extends="struts-default">
+        <action name="*.*" class="com.controller.{1}Action" method="{2}">
+            <result name="success" >/WEB-INF/view/success.jsp</result>
+            <allowed-methods>login</allowed-methods>
+        </action>
+    </package>
+</struts>
